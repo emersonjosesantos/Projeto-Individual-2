@@ -59,7 +59,7 @@ def teste():
             print("Read",crsr.rowcount,"row(s) of data.")
 
         except pyodbc.Error as err:
-            cnxn.roolback()
+            crsr.roolback()
             print("Something went wrong: {}".format(err))
             
 Conexao()
