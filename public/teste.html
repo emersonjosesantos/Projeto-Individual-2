@@ -1,0 +1,40 @@
+<script>
+  function teste(){
+      fetch("/usuarios/verificarTorres", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fkEmpresaServer: sessionStorage.FK_EMPRESA,
+        })
+      }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO entrar()!")
+
+        if (resposta.ok) {
+          console.log(resposta);
+
+          resposta.json().then(json => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+
+            sessionStorage.FK_EMPRESA = json.fkEmpresa;
+
+              setTimeout(function () {
+              window.location = "now-ui-dashboard-master/examples/dashboard.html"
+            }, 1000); // apenas para exibir o loading
+
+          });
+        }else{
+          setTimeout(function () {
+              window.location = "plano.html"
+            }, 1000); // apenas para exibir o loading
+        }
+
+      }).catch(function (erro) {
+        console.log("ERRO: "+erro);
+      })
+
+      return false;
+  }
+</script>
